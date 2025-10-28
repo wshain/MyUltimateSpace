@@ -57,10 +57,10 @@ class NavBar extends Component {
             return (
                 <ul className="navbar-nav">
                     <li className="nav-item">
-                        <Link className="navbar-brand" to="/calculator/login">登录</Link>
+                        <Link className="nav-link" to="/calculator/login">登录</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="navbar-brand" to="/calculator/register">注册</Link>
+                        <Link className="nav-link" to="/calculator/register">注册</Link>
                     </li>
                 </ul>
             );
@@ -73,7 +73,7 @@ class NavBar extends Component {
                 <div className="container">
                     <Link className="navbar-brand" to="/calculator">Web</Link>
                     <button
-                        class="navbar-toggler"
+                        className="navbar-toggler"
                         type="button"
                         data-bs-toggle="collapse"
                         data-bs-target="#navbarText"
@@ -81,7 +81,7 @@ class NavBar extends Component {
                         aria-expanded="false"
                         aria-label="Toggle navigation"
                     >
-                        <span class="navbar-toggler-icon"></span>
+                        <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse" id="navbarText">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">

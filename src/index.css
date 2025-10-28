@@ -52,3 +52,14 @@ body {
 .calculator > button:hover {
   background-color: #B5B5B5;
 }
+
+.user-card:hover {
+  box-shadow: 2px 2px 10px lightgrey;
+  transition: 500ms;
+}
+
+.img-field{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

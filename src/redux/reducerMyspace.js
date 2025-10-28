@@ -1,5 +1,6 @@
 import { act } from "react-dom/test-utils";
 import ACTIONS from "./actions"
+import store from './store';
 
 const reducerMyspace = (state = {
     username:"",
@@ -9,6 +10,7 @@ const reducerMyspace = (state = {
     access:"",
     refresh:"",
     is_login:false,
+
 },action) =>{
     switch(action.type){
         case ACTIONS.SET_USERNAME:
@@ -47,7 +49,6 @@ const reducerMyspace = (state = {
                 access:action.resp.access,
                 refresh:action.resp.refresh,
                 is_login:true,
-
             }
         default:
             return state;

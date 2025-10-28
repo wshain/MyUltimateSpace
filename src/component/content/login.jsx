@@ -57,7 +57,12 @@ class Login extends Component {
                             'Authorization': "Bearer " + access,
                         },
                         success(resp) {
-                            getinfo(resp);
+                            getinfo({
+                                ...resp,
+                                access:access,
+                                refresh:refresh,
+                                is_login:true,
+                            });
                         },
                         error: ()=> {
                             setErrorMessage("获取用户信息失败");
