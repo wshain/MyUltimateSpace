@@ -5,7 +5,9 @@ class UserProfilePost extends Component {
     state = {  } 
     render() { 
         return (
-            <Base></Base>
+            <Base>
+            
+            </Base>
         );
     }
 }

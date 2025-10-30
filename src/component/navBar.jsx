@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import $ from 'jquery';
 
-
 class NavBar extends Component {
     state = {  };
 
@@ -46,7 +45,7 @@ class NavBar extends Component {
             return (
                 <ul className="navbar-nav">
                     <li className="nav-item">
-                        <a className="nav-link" style={{cursor: "pointer"}}>{this.props.username}</a>
+                        <Link className="nav-link" style={{cursor: "pointer"}}to={`/calculator/userProfile/${this.props.id}`}>{this.props.username}</Link>
                     </li>
                     <li className="nav-item">
                         <a onClick={this.handleClick} className="nav-link" style={{cursor: "pointer"}}>退出</a>

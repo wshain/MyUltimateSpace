@@ -3,8 +3,12 @@ import ACTIONS from "./actions"
 import store from './store';
 
 const reducerMyspace = (state = {
+    id: "",
     username:"",
     password:"",
+    photo:null,
+    followerCount: 0,
+    is_followed: false,
     confirm_password:"",
     error_message:"",
     access:"",
@@ -46,6 +50,9 @@ const reducerMyspace = (state = {
         case ACTIONS.GETINFO:
             return {
                 ...state,
+                id:action.resp.id,
+                photo:action.resp.photo,
+                is_followed: action.resp.is_followed,
                 access:action.resp.access,
                 refresh:action.resp.refresh,
                 is_login:true,

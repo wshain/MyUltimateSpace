@@ -18,7 +18,7 @@ class App extends Component {
     render() { 
         return (
             <React.Fragment>
-                <NavBar is_login={this.props.is_login} username={this.props.username} />
+                <NavBar is_login={this.props.is_login} username={this.props.username} id ={this.props.id}/>
                 <div className='container'>
                     <Routes>
                         <Route path='/calculator' element={<Home />} />
@@ -42,6 +42,7 @@ const mapStateToProps = (state, props) => {
     return {
         username:state.reducerMyspace.username,
         is_login:state.reducerMyspace.is_login,
+        id:state.reducerMyspace.id,
     }
 };
 
