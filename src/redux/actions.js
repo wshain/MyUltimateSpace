@@ -12,6 +12,7 @@ const ACTIONS = {
     ISLOGIN:"is-login",
     REFRESH:"refresh",
     GETINFO:"getinfo",
+    LOGOUT:"logout",
     
 };
 

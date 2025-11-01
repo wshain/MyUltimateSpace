@@ -1,6 +1,4 @@
-import { act } from "react-dom/test-utils";
 import ACTIONS from "./actions"
-import store from './store';
 
 const reducerMyspace = (state = {
     id: "",
@@ -56,6 +54,17 @@ const reducerMyspace = (state = {
                 access:action.resp.access,
                 refresh:action.resp.refresh,
                 is_login:true,
+            }
+        case ACTIONS.LOGOUT:
+            return {
+                ...state,
+                id:"",
+                username:"",
+                photo:null,
+                followerCount:0,
+                access:"",
+                refresh:"",
+                is_login:false,
             }
         default:
             return state;

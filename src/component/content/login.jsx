@@ -1,4 +1,4 @@
-import React, { Component,setState } from 'react';
+import React, { Component } from 'react';
 import Base from './base';
 import $ from 'jquery';
 import { jwtDecode } from 'jwt-decode';

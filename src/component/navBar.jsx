@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import $ from 'jquery';
+import { connect } from 'react-redux';
 
 class NavBar extends Component {
-    state = {  };
-
     handleClick = () => {
         $.ajax({
             url: "https://app165.acapp.acwing.com.cn/calculator/logout/",
@@ -12,6 +11,7 @@ class NavBar extends Component {
             success: resp => {
                 console.log(resp);
                 if (resp.result === "success") {
+                    this.props.logout();
                     window.location.href="/calculator";
                 }
             }
@@ -48,7 +48,7 @@ class NavBar extends Component {
                         <Link className="nav-link" style={{cursor: "pointer"}}to={`/calculator/userProfile/${this.props.id}`}>{this.props.username}</Link>
                     </li>
                     <li className="nav-item">
-                        <a onClick={this.handleClick} className="nav-link" style={{cursor: "pointer"}}>退出</a>
+                        <Link onClick={this.handleClick} className="nav-link" style={{cursor: "pointer"}}>退出</Link>
                     </li>
                 </ul>
             )
@@ -98,5 +98,9 @@ class NavBar extends Component {
         );
     }
 }
- 
-export default NavBar;
+const mapDispatchToProps = (dispatch)=>({
+    logout:()=>dispatch({
+        type:"LOGOUT",
+    }),
+});
+export default connect(mapDispatchToProps)(NavBar);

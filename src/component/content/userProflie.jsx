@@ -1,14 +1,13 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, {useState, useEffect } from 'react';
 import Base from "./base";
 import UserProfileInfo from "./space/userProfileInfo";
 import UserProfileWrite from "./space/userProfileWrite";
 import UserProfilePost from "./space/userProfilePost";
 import $ from "jquery";
-import store from '../../redux/store'
 import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-const UserProfile = ({id:currentUserId}) => {
+const UserProfile = ({id, access}) => {
     const { userId } = useParams();
     const parsedUserId = parseInt(userId);
 
@@ -20,6 +19,10 @@ const UserProfile = ({id:currentUserId}) => {
         is_followed: false,
         is_me: false,
         });
+    const [posts, setPosts] = useState({
+        posts:[],
+        count:0,
+        });
     useEffect(()=>{
         // 只在 userId 或 currentUserId 变化时重新请求
         if (isNaN(parsedUserId)) return;
@@ -30,7 +33,7 @@ const UserProfile = ({id:currentUserId}) => {
                 user_id: parsedUserId,
             },
             headers: {
-                'Authorization': "Bearer " + store.getState().reducerMyspace.access,
+                'Authorization': "Bearer " + access,
             },
             success:(resp)=> {
                 setUser({
@@ -39,7 +42,7 @@ const UserProfile = ({id:currentUserId}) => {
                     photo: resp.photo,
                     followerCount: resp.followerCount,
                     is_followed: resp.is_followed,
-                    is_me: currentUserId === resp.id ? true : false,
+                    is_me: id === resp.id ? true : false,
                     });
                 },
             error: (err) => {
@@ -47,7 +50,23 @@ const UserProfile = ({id:currentUserId}) => {
                 // 可选：设置错误状态或提示
                 }
             });
-    },[parsedUserId, currentUserId]);// 依赖项
+        $.ajax({
+            url:"https://app165.acapp.acwing.com.cn/myspace/post/",
+            type:"GET",
+            data: {
+                user_id: parsedUserId,
+            },
+            headers: {
+                'Authorization': "Bearer " + access,
+            },
+            success:(resp)=> {
+                setPosts({
+                    posts:resp,
+                    count:resp.length,
+                    });
+                },
+        });
+    },[parsedUserId, id]);// 依赖项
     
     const handleFollowChange = (isFollowed) => {
         setUser(prev => ({
@@ -56,11 +75,33 @@ const UserProfile = ({id:currentUserId}) => {
         followerCount: isFollowed ? prev.followerCount + 1 : prev.followerCount - 1
         }));
     };
+    const handleAddPost = (newPostContent) => {
+        setPosts(prev => {
+            const newPost = {
+                id: prev.count + 1, 
+                userId: user.id,
+                content: newPostContent.content, 
+            };
+            return {
+                posts: [newPost, ...prev.posts],
+                count: prev.count + 1,
+            };
+        });
+    };
+    const handleDeletePost=(post_id)=>{
+        setPosts(prev => {
+            const newPosts = prev.posts.filter(post => post.id !== post_id);
+            return {
+              posts: newPosts,
+              count: newPosts.length,
+            };
+          });
+    }
     const render_userProfileWrite = (is_me) =>{
         if(!is_me) return;
         else {
             return (
-                <UserProfileWrite></UserProfileWrite>
+                <UserProfileWrite onAddPost={handleAddPost}></UserProfileWrite>
             );
         }
     }
@@ -73,7 +114,7 @@ const UserProfile = ({id:currentUserId}) => {
             {render_userProfileWrite(user.is_me)}
             </div>
             <div className="col-9">
-            <UserProfilePost></UserProfilePost>
+            <UserProfilePost posts={posts} onDeletePost={handleDeletePost}></UserProfilePost>
             </div>        
         </div>
         </Base>
@@ -83,6 +124,7 @@ const UserProfile = ({id:currentUserId}) => {
 const mapStateToProps = (state, props) => {
     return {
         id:state.reducerMyspace.id,
+        access:state.reducerMyspace.access,
     }
 };
  export default connect(mapStateToProps)(UserProfile);
