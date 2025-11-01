@@ -63,7 +63,7 @@ class Register extends Component {
                                     <input onChange={e => {this.setState({password_confirm: e.target.value})}} type="password" className="form-control" id="password_confirm" />
                                 </div>
                                 <div style={{height: "2rem", color: "red"}}>{this.state.error_message}</div>
-                                <button onClick={this.handleClick} style={{width: "100%"}} type="submit" className="btn btn-primary">登录</button>
+                                <button onClick={this.handleClick} style={{width: "100%"}} type="submit" className="btn btn-primary">注册</button>
                             </form>
                         </div>
                     </div>

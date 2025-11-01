@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import $ from 'jquery';
 import { connect } from 'react-redux';
+import ACTIONS from '../redux/actions';
 
 class NavBar extends Component {
     handleClick = () => {
@@ -100,7 +101,7 @@ class NavBar extends Component {
 }
 const mapDispatchToProps = (dispatch)=>({
     logout:()=>dispatch({
-        type:"LOGOUT",
+        type:ACTIONS.LOGOUT,
     }),
 });
-export default connect(mapDispatchToProps)(NavBar);
+export default connect(null,mapDispatchToProps)(NavBar);
