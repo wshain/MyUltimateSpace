@@ -24,8 +24,6 @@ const UserProfile = ({id, access}) => {
         count:0,
         });
     useEffect(()=>{
-        // 只在 userId 或 currentUserId 变化时重新请求
-        if (isNaN(parsedUserId)) return;
         $.ajax({
             url: "https://app165.acapp.acwing.com.cn/myspace/getinfo/",
             type: "GET",
@@ -115,7 +113,7 @@ const UserProfile = ({id, access}) => {
             </div>
             <div className="col-9">
             <UserProfilePost posts={posts} onDeletePost={handleDeletePost}></UserProfilePost>
-            </div>        
+            </div>
         </div>
         </Base>
     );

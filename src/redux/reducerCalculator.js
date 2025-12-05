@@ -1,4 +1,3 @@
-import { act } from "react-dom/test-utils";
 import ACTIONS from "./actions"
 
 const evaluate = state => {

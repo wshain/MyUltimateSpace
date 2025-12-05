@@ -9,6 +9,7 @@ import Register from './content/register';
 import NotFound from './content/notFound';
 import { connect } from 'react-redux';
 import UserProfile from './content/userProflie';
+import ChatApp from './content/chatApp';
 
 
 class App extends Component {
@@ -25,6 +26,7 @@ class App extends Component {
                         <Route path='/calculator/home' element={<Home />} />
                         <Route path='/calculator/calculator' element={this.props.is_login ? <Calculator /> : <Navigate replace to="/calculator/login" />} />
                         <Route path='/calculator/userList' element={this.props.is_login ? <UserList /> : <Navigate replace to="/calculator/login" />} />
+                        <Route path='/calculator/chatApp' element = {this.props.is_login ? <ChatApp/> : <Navigate replace to ="/calculator/login"/>} />
                         <Route path='/calculator/login' element={this.props.is_login ? <Navigate replace to="/calculator" /> : <Login />} />
                         <Route path='/calculator/userProfile' element={<UserProfile />} />
                         <Route path='/calculator/register' element={this.props.is_login ? <Navigate replace to="/calculator" /> : <Register />} />

@@ -41,6 +41,16 @@ class NavBar extends Component {
             return "";
         }
     }
+    render_chatApp = () => {
+        if(this.props.is_login) {
+            return  (
+                <li className="nav-item">
+                    <Link className="nav-link" to="/calculator/chatApp">ChatBot</Link>
+                </li>
+            )
+
+        } else return "";
+    }
     render_user = () => {
         if (this.props.is_login) {
             return (
@@ -90,6 +100,7 @@ class NavBar extends Component {
                             </li>
                             {this.render_userList()}
                             {this.render_calculator()}
+                            {this.render_chatApp()}
                             
                         </ul>
                         {this.render_user()}
